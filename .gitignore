@@ -1,0 +1,29 @@
+# Ignore maps and models folders
+maps/
+models/
+static/
+uploads/
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore Python cache files
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore logs and temporary files
+logs/
+*.log
+*.tmp
+
+# Ignore environment and dependency files
+.env
+venv/
+node_modules/
+
+# Ignore IDE/editor specific files
+.vscode/
+.idea/
+*.swp

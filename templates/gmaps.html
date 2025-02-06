@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Google Maps Directions API Example</title>
+    <script async  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWd1ML854dizine7XaPAECZSIQDhQEOpk&loading=async&callback=initMap"></script>
+</body>
+    <style>
+      /* Set the size of the map */
+      #map {
+        height: 500px;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>Google Maps Route from Source to Destination</h3>
+    <div id="map"></div>
+    <script>
+      let map, directionsService, directionsRenderer;
+
+      // Initialize the map
+      function initMap() {
+        // Create a map centered on Los Angeles
+        map = new google.maps.Map(document.getElementById("map"), {
+          center: { lat: 34.0522, lng: -118.2437 }, // Coordinates for Los Angeles
+          zoom: 12,
+        });
+
+        // Initialize the DirectionsService and DirectionsRenderer
+        directionsService = new google.maps.DirectionsService();
+        directionsRenderer = new google.maps.DirectionsRenderer();
+        directionsRenderer.setMap(map);
+
+        // Define source and destination points (replace with actual locations)
+        const source = "Santa Monica, CA"; // Source location
+        const destination = "Downtown Los Angeles, CA"; // Destination location
+
+        // Call function to get route
+        calculateRoute(source, destination);
+      }
+
+      // Calculate and display the route
+      function calculateRoute(source, destination) {
+        const request = {
+          origin: source,
+          destination: destination,
+          travelMode: google.maps.TravelMode.DRIVING, // Change mode if needed (DRIVING, WALKING, BICYCLING, TRANSIT)
+        };
+
+        // Request directions and display the route
+        directionsService.route(request, function (result, status) {
+          if (status == "OK") {
+            directionsRenderer.setDirections(result);
+          } else {
+            alert("Directions request failed due to " + status);
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

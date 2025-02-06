@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Infrastructure in Disaster-Prone Areas</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0d0d0d, #333);
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0px;
+      background: rgba(20, 20, 20, 0.8);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1200;
+    }
+
+    .navbar .logo {
+      font-size: 24px;
+      font-weight: 600;
+      padding-left: 50px;
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      padding-right: 50px;
+    }
+
+    .navbar ul li a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: 400;
+      transition: color 0.3s ease;
+    }
+
+    .navbar ul li a:hover {
+      color: #00ffcc;
+    }
+
+    .hero-section {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: url('https://via.placeholder.com/1500x800') no-repeat center center/cover;
+      position: relative;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    .hero-content {
+      z-index: 1;
+    }
+
+    .hero-content h1 {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+      margin-bottom: 40px;
+      animation: fadeIn 3s ease-in-out;
+    }
+
+    .hero-content .cta-button {
+      padding: 15px 30px;
+      background: #00ffcc;
+      color: #000;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .hero-content .cta-button:hover {
+      background: #009999;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .form-section {
+      padding: 100px 50px;
+      background: #222;
+      color: #fff;
+      text-align: center;
+    }
+
+    .form-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 50px;
+    }
+
+    .form-container {
+      background: #333;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 5px;
+    }
+
+    .form-group input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      background: #444;
+      color: #fff;
+      border: 1px solid #555;
+      border-radius: 5px;
+    }
+
+    .form-group button {
+      padding: 15px 30px;
+      background: #00ffcc;
+      color: #000;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .form-group button:hover {
+      background: #009999;
+    }
+
+    .image-section {
+      padding: 50px;
+      text-align: center;
+    }
+
+    .image-container {
+      display: flex;
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .image-container img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .image-label {
+      font-size: 1.2rem;
+      margin-top: 10px;
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">ResQLink</div>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section" id="home">
+    <div class="hero-content">
+      <h1>Infrastructure in Disaster-Prone Areas</h1>
+      <p>Upload necessary data to assess and plan infrastructure in areas affected by natural disasters. Make informed decisions to enhance safety and resilience.</p>
+    </div>
+  </section>
+
+  <!-- Form Section -->
+  <section class="form-section">
+    <h2>Upload Required Files</h2>
+    <div class="form-container">
+      <form action="/infrastructure" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="file1">File 1: Shapefile (.shp)</label>
+          <input type="file" id="file1" name="file1" required>
+        </div>
+
+        <div class="form-group">
+          <label for="file1">File 1: Shapefile (.shx)</label>
+          <input type="file" id="file1shx" name="file1shx" required>
+        </div>
+
+        <div class="form-group">
+          <label for="file2">File 2: Road Data (.shp)</label>
+          <input type="file" id="file2" name="file2" required>
+        </div>
+
+        <div class="form-group">
+          <label for="file2shx">File 2: Road Data (.shx)</label>
+          <input type="file" id="file2shx" name="file2shx" required>
+        </div>
+
+        <div class="form-group">
+          <label for="file3">File 3: Railways Data (.shp)</label>
+          <input type="file" id="file3" name="file3" required>
+        </div>
+
+        <div class="form-group">
+          <label for="file3shx">File 3: Railways Data (.shx)</label>
+          <input type="file" id="file3shx" name="file3shx" required>
+        </div>
+
+        <div class="form-group">
+          <label for="file4">File 4: Building Data (.shp)</label>
+          <input type="file" id="file4" name="file4" required>
+        </div>
+
+        <div class="form-group">
+          <label for="file4">File 4: Building Data (.shx)</label>
+          <input type="file" id="file4shx" name="file4shx" required>
+        </div>
+
+        <div class="form-group">
+          <label for="file5">File 5: Earthquake Data</label>
+          <input type="file" id="file5" name="file5" required>
+        </div>
+
+        <h3>OR</h3>
+
+        <div class="form-group">
+          <label for="file6">File 1: Risk Data</label>
+          <input type="file" id="file6" name="file6" required>
+        </div>
+
+        <div class="form-group">
+          <button type="submit">Generate Risk Map</button>
+        </div>
+
+        
+      </form>
+    </div>
+  </section>
+
+  <!-- Images Section -->
+  <section class="image-section">
+    <h2>Visualizations</h2>
+    <div class="image-container">
+      <div class="image-item">
+        <img src="{{ url_for('static', filename='display/visualize1.png') }}" alt="Visualization 1">
+        <div class="image-label">Visualization 1</div>
+      </div>
+      <div class="image-item">
+        <img src="{{ url_for('static', filename='display/visualize2.png') }}" alt="Visualization 2">
+        <div class="image-label">Visualization 2</div>
+      </div>
+    </div>
+    <div class="image-container">
+      <div class="image-item">
+        <img src="{{ url_for('static', filename='display/visualize3.png') }}" alt="Visualization 3">
+        <div class="image-label">Visualization 3</div>
+      </div>
+      <div class="image-item">
+        <img src="{{ url_for('static', filename='display/visualize_all.png') }}" alt="All Visualizations">
+        <div class="image-label">All Visualizations</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p></p>
+  </footer>
+</body>
+</html>

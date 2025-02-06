@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Innovative Homepage Design</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0d0d0d, #333);
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0px;
+      background: rgba(20, 20, 20, 0.8);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1200;
+    }
+
+    .navbar .logo {
+      font-size: 24px;
+      font-weight: 600;
+      padding-left: 50px;
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      padding-right: 50px;
+    }
+
+    .navbar ul li a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: 400;
+      transition: color 0.3s ease;
+    }
+
+    .navbar ul li a:hover {
+      color: #00ffcc;
+    }
+
+    .hero-section {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: url('https://via.placeholder.com/1500x800') no-repeat center center/cover;
+      position: relative;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    .hero-content {
+      z-index: 1;
+    }
+
+    .hero-content h1 {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+      margin-bottom: 40px;
+      animation: fadeIn 3s ease-in-out;
+    }
+
+    .hero-content .cta-button {
+      padding: 15px 30px;
+      background: #00ffcc;
+      color: #000;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .hero-content .cta-button:hover {
+      background: #009999;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .features-section {
+      padding: 100px 50px;
+      background: #222;
+      color: #fff;
+      text-align: center;
+    }
+
+    .features-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 50px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .feature-card {
+      background: #333;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .feature-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+    }
+
+    .feature-card p {
+      font-size: 1rem;
+      color: #bbb;
+    }
+
+    .footer {
+      background: #111;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .footer a {
+      color: #00ffcc;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">ResQLink</div>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#features">Modules</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section" id="home">
+    <div class="hero-content">
+        <h1>Welcome to the Future of Disaster Response</h1>
+        <p>Experience the next generation of disaster rescue and resilience planning, powered by satellite imagery and LiDAR technology for smarter, faster, and safer emergency response.</p>
+        <button class="cta-button">Get Started</button>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features-section" id="features">
+    <h2>Modules</h2>
+    <div class="features-grid">
+        <div class="feature-card">
+            <h3><a href="/architecture">Architecture</a></h3>
+            <p>We design a robust system architecture leveraging satellite imagery and LiDAR data, ensuring seamless integration for real-time disaster response and resilience planning.</p>
+          </div>
+          <div class="feature-card">
+            <h3><a href="/literature_survey">Literature Survey</a></h3>
+            <p>A comprehensive review of existing research and technologies related to disaster response, satellite imagery, and LiDAR applications to guide our project’s development and innovation.</p>
+          </div>          
+        <div class="feature-card">
+            <h3>Fire Risk Assessment and Rescue Route Planning</h3>
+            <p>Utilizing satellite imagery and LiDAR, we assess fire risks and plan optimal rescue routes to ensure quick and safe evacuation during emergencies.</p>
+          </div>
+          <div class="feature-card">
+            <h3>Dynamic Resource Distribution</h3>
+            <p>Real-time resource allocation and distribution, ensuring that emergency teams are equipped and ready to respond promptly to disaster zones.</p>
+          </div>
+          <div class="feature-card">
+            <h3><a href="/infrastructure">Infrastructure in Disaster-Prone Areas</a></h3>
+            <p>Assessing and planning infrastructure placement in high-risk areas to ensure resilience and safety during natural disasters.</p>
+          </div>
+          <div class="feature-card">
+            <h3>Building Collapse Prediction</h3>
+            <p>Leveraging data to predict building collapses in disaster-prone areas, enabling timely evacuations and mitigation strategies.</p>
+          </div>
+          <div class="feature-card">
+            <h3>Post-Disaster Damage Assessment and Recovery Planning</h3>
+            <p>Assessing damage after a disaster and planning recovery efforts using satellite and LiDAR data to prioritize critical areas for rebuilding.</p>
+          </div>
+          <div class="feature-card">
+            <h3>Emergency Safe Zones and Shelter Planning</h3>
+            <p>Identifying and planning safe zones and shelters to accommodate disaster-affected populations and ensure their safety during emergencies.</p>
+          </div>
+          </div>          
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p></p>
+  </footer>
+</body>
+</html>
