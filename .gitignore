@@ -3,6 +3,7 @@ maps/
 models/
 static/
 uploads/
+files/
 
 # Ignore system files
 .DS_Store

@@ -15,6 +15,9 @@
       overflow-x: hidden;
     }
 
+    h2{
+      padding-left: 50px;
+    }
     .navbar {
       display: flex;
       justify-content: space-between;
@@ -191,6 +194,99 @@
       font-size: 1.2rem;
       margin-top: 10px;
     }
+    table {
+  width: 80%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  background: #222;
+  color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+th, td {
+  border: 1px solid #444;
+  padding: 15px;
+  text-align: center;
+}
+
+th {
+  background-color: #00ffcc;
+  color: #000;
+  font-weight: 600;
+}
+
+tr:nth-child(even) {
+  background-color: #333;
+}
+
+tr:nth-child(odd) {
+  background-color: #444;
+}
+
+.dataset-container {
+  width: 80%;
+  margin: 40px auto;
+  padding: 20px;
+  background: #222;
+  color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  text-align: left;
+}
+
+.dataset-container h3 {
+  font-size: 1.8rem;
+  color: #00ffcc;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #00ffcc;
+  padding-bottom: 5px;
+}
+
+.dataset-container h4 {
+  font-size: 1.5rem;
+  color: #28a745;
+  margin-top: 15px;
+}
+
+.dataset-container pre {
+  background: #333;
+  padding: 15px;
+  border-radius: 5px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-size: 14px;
+  overflow-x: auto;
+  max-height: 300px;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.dataset-container p {
+  font-size: 1rem;
+  color: #bbb;
+  margin-top: 10px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .dataset-container {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .dataset-container h3 {
+    font-size: 1.5rem;
+  }
+
+  .dataset-container h4 {
+    font-size: 1.3rem;
+  }
+
+  .dataset-container pre {
+    font-size: 12px;
+  }
+}
 
   </style>
 </head>
@@ -278,32 +374,215 @@
       </form>
     </div>
   </section>
-
-  <!-- Images Section -->
   <section class="image-section">
-    <h2>Visualizations</h2>
+    <h2>Visualizations of Iran (Input)</h2>
     <div class="image-container">
       <div class="image-item">
-        <img src="{{ url_for('static', filename='display/visualize1.png') }}" alt="Visualization 1">
-        <div class="image-label">Visualization 1</div>
+        <img src="{{ url_for('static', filename='display/iran1.png') }}" alt="Earthquakes in Iran">
+        <div class="image-label">Earthquakes in Iran</div><br><br>
       </div>
       <div class="image-item">
-        <img src="{{ url_for('static', filename='display/visualize2.png') }}" alt="Visualization 2">
-        <div class="image-label">Visualization 2</div>
+        <img src="{{ url_for('static', filename='display/iran_roads.png') }}" alt="Roads in Iran">
+        <div class="image-label">Roads in Iran</div><br><br>
       </div>
     </div>
     <div class="image-container">
       <div class="image-item">
-        <img src="{{ url_for('static', filename='display/visualize3.png') }}" alt="Visualization 3">
-        <div class="image-label">Visualization 3</div>
+        <img src="{{ url_for('static', filename='display/iran_buildings.png') }}" alt="Buildings in Iran">
+        <div class="image-label">Buildings in Iran</div><br><br>
       </div>
       <div class="image-item">
-        <img src="{{ url_for('static', filename='display/visualize_all.png') }}" alt="All Visualizations">
-        <div class="image-label">All Visualizations</div>
+        <img src="{{ url_for('static', filename='display/iran_rail.png') }}" alt="Railways in Iran">
+        <div class="image-label">Railways in Iran</div><br><br>
+      </div>
+    </div>
+    <div class="image-container">
+      <div class="image-item">
+        <img src="{{ url_for('static', filename='display/ndvi_iran.png') }}" alt="Vegetation in Iran">
+        <div class="image-label">Vegetation in Iran</div><br><br>
+      </div>
+      <div class="image-item">
+        <img src="{{ url_for('static', filename='display/iran_all.png') }}" alt="Iran - all in one">
+        <div class="image-label">Iran - all in one</div><br><br>
       </div>
     </div>
   </section>
 
+  {% for dataset in [data_list1] %}
+    <div class="dataset-container">
+        <h3>Distance to Railway feature</h3>
+        <h4>First 30 Records</h4>
+        <pre>{{ dataset[0].data | tojson(indent=2) }}</pre>
+
+        <h4>Data Description</h4>
+        <pre>{{ dataset[0].description | tojson(indent=2) }}</pre>
+    </div>
+{% endfor %}
+
+{% for dataset in [data_list2] %}
+    <div class="dataset-container">
+        <h3>Distance to Road feature</h3>
+        <h4>First 30 Records</h4>
+        <pre>{{ dataset[0].data | tojson(indent=2) }}</pre>
+
+        <h4>Data Description</h4>
+        <pre>{{ dataset[0].description | tojson(indent=2) }}</pre>
+    </div>
+{% endfor %}
+
+{% for dataset in [data_list3] %}
+    <div class="dataset-container">
+        <h3>Building Density feature</h3>
+        <h4>First 30 Records</h4>
+        <pre>{{ dataset[0].data | tojson(indent=2) }}</pre>
+
+        <h4>Data Description</h4>
+        <pre>{{ dataset[0].description | tojson(indent=2) }}</pre>
+    </div>
+{% endfor %}
+
+{% for dataset in [data_list4] %}
+    <div class="dataset-container">
+        <h3>Features Combined</h3>
+        <h4>First 30 Records</h4>
+        <pre>{{ dataset[0].data | tojson(indent=2) }}</pre>
+
+        <h4>Data Description</h4>
+        <pre>{{ dataset[0].description | tojson(indent=2) }}</pre>
+    </div>
+{% endfor %}
+
+
+  <!-- Images Section -->
+  <section class="image-section">
+    <h2>Visualizations of Turkey</h2>
+    <div class="image-container">
+      <div class="image-item">
+        <img src="{{ url_for('static', filename='display/visualize1.png') }}" alt="Earthquakes in Turkey">
+        <div class="image-label">Earthquakes in Turkey</div><br><br>
+      </div>
+      <div class="image-item">
+        <img src="{{ url_for('static', filename='display/visualize2.png') }}" alt="Roads in Turkey">
+        <div class="image-label">Roads in Turkey</div><br><br>
+      </div>
+    </div>
+    <div class="image-container">
+      <div class="image-item">
+        <img src="{{ url_for('static', filename='display/visualize3.png') }}" alt="Buildings in Turkey">
+        <div class="image-label">Buildings in Turkey</div><br><br>
+      </div>
+      <div class="image-item">
+        <img src="{{ url_for('static', filename='display/visualize4.png') }}" alt="Railways in Turkey">
+        <div class="image-label">Railways in Turkey</div><br><br>
+      </div>
+    </div>
+    <div class="image-container">
+      <div class="image-item">
+        <img src="{{ url_for('static', filename='display/ndvi_turkey.png') }}" alt="Vegetation in Turkey">
+        <div class="image-label">Vegetation in Turkey</div><br><br>
+      </div>
+    </div>
+  </section>
+  <h2>Model Performance Comparison</h2>
+  <table>
+    <tr>
+      <th>Model</th>
+      <th>Epochs</th>
+      <th>Accuracy</th>
+      <th>Precision</th>
+      <th>Recall</th>
+      <th>F1-Score</th>
+  </tr>
+  <tr>
+      <td>XGBoost</td>
+      <td>-</td>
+      <td>0.9947</td>
+      <td>1.00</td>
+      <td>1.00</td>
+      <td>1.00</td>
+  </tr>
+  <tr>
+      <td>TabNet</td>
+      <td>10</td>
+      <td>0.9967</td>
+      <td>0.99</td>
+      <td>1.00</td>
+      <td>1.00</td>
+  </tr>
+  <tr>
+      <td>TabNet</td>
+      <td>20</td>
+      <td>0.9967</td>
+      <td>0.99</td>
+      <td>1.00</td>
+      <td>1.00</td>
+  </tr>
+  <tr>
+      <td>TabNet</td>
+      <td>30</td>
+      <td>0.9967</td>
+      <td>0.99</td>
+      <td>1.00</td>
+      <td>1.00</td>
+  </tr>
+  <tr>
+      <td>Feed Forward NN</td>
+      <td>10</td>
+      <td>0.9905</td>
+      <td>0.99</td>
+      <td>0.98</td>
+      <td>0.99</td>
+  </tr>
+  <tr>
+      <td>Feed Forward NN</td>
+      <td>20</td>
+      <td>0.9936</td>
+      <td>1.00</td>
+      <td>0.99</td>
+      <td>0.99</td>
+  </tr>
+  <tr>
+      <td>Feed Forward NN</td>
+      <td>30</td>
+      <td>0.9906</td>
+      <td>0.99</td>
+      <td>0.99</td>
+      <td>0.99</td>
+  </tr>
+</table>
+<section class="image-section">
+  <h2>Visualizations of Turkey - Output</h2>
+  <div class="image-container">
+    <div class="image-item">
+      <img src="{{ url_for('static', filename='display/visualize5.png') }}" alt="Risk points predicted">
+      <div class="image-label">Risk points predicted by XGBoost</div><br><br>
+    </div>
+    <div class="image-item">
+      <img src="{{ url_for('static', filename='display/visualize_all.png') }}" alt="Risk Map">
+      <div class="image-label">Risk Map from XGBoost output</div><br><br><br><br>
+    </div>
+  </div>
+  <div class="image-container">
+    <div class="image-item">
+      <img src="{{ url_for('static', filename='display/tabnet_output.png') }}" alt="Risk points predicted">
+      <div class="image-label">Risk points predicted by TabNet</div><br><br>
+    </div>
+    <div class="image-item">
+      <img src="{{ url_for('static', filename='display/tabnet_risk_map.png') }}" alt="Risk Map">
+      <div class="image-label">Risk Map from TabNet output</div><br><br><br><br>
+    </div>
+  </div>
+  <div class="image-container">
+    <div class="image-item">
+      <img src="{{ url_for('static', filename='display/fnn_output.png') }}" alt="Risk points predicted">
+      <div class="image-label">Risk points predicted by FNN</div><br><br>
+    </div>
+    <div class="image-item">
+      <img src="{{ url_for('static', filename='display/fnn_risk_map.png') }}" alt="Risk Map">
+      <div class="image-label">Risk Map from FNN output</div><br><br>
+    </div>
+  </div>
+</section>
   <!-- Footer -->
   <footer class="footer">
     <p></p>

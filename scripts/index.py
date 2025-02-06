@@ -14,6 +14,39 @@ def architecture():
 def literature_survey():
     return render_template('literature-survey.html')
 
+@app.route('/fire_risk', methods=['GET', 'POST'])
+def fire_risk():
+    return render_template('fire_risk.html')
+
+@app.route('/resource', methods=['GET', 'POST'])
+def resource():
+    import pandas as pd
+
+    def load_data(file_path):
+        # Check if the file is a CSV or Excel based on the file extension
+        if file_path.endswith('.csv'):
+            df = pd.read_csv(file_path)
+        elif file_path.endswith('.xlsx'):
+            df = pd.read_excel(file_path)
+        else:
+            raise ValueError("Unsupported file format. Only .csv and .xlsx are supported.")
+        
+        # Extract first 30 records and summary statistics
+        df_sample = df.head(30)  # First 30 records
+        df_desc = df.describe().to_dict()  # Summary statistics
+        
+        return {"data": df_sample.to_dict(orient="records"), "description": df_desc}
+
+
+    # Load data from CSV files
+    data_list1, data_list2, data_list3, data_list4, data_list5 = [], [], [], [], []
+    data_list1.append(load_data("../files/boundaries.xlsx"))
+    data_list2.append(load_data("../files/occ_count.xlsx"))
+    data_list3.append(load_data("../files/Population_data.csv"))
+    data_list4.append(load_data("../files/fire_data.csv"))
+    data_list5.append(load_data("../files/intermediate.csv"))
+    return render_template('resource.html', data_list1 = data_list1, data_list2 = data_list2, data_list3 = data_list3, data_list4 = data_list4, data_list5 = data_list5)
+
 @app.route('/infrastructure', methods=['GET', 'POST'])
 def infrastructure():
     if request.method == 'POST':
@@ -53,10 +86,24 @@ def infrastructure():
         # visualize_shapefile(f'../uploads/{shapefiles.filename}', f'../uploads/{railways_data_file.filename}', 3)
         # visualize_shapefile(f'../uploads/{shapefiles.filename}', f'../uploads/{buildings_data_file.filename}', 3)
         # visualize_shapefile(f'../uploads/{shapefiles.filename}', f'../uploads/{road_data_file.filename}', f'../uploads/{railways_data_file.filename}')
+        
+        return render_template('infrastructure.html', message="Files received successfully!", images=['display/visualize1.png', 'display/visualize2.png', 'display/visualize3.png', 'display/visualize_all.png'], data_list1=data_list1, data_list2=data_list2, data_list3=data_list3)
+    data_list1, data_list2, data_list3, data_list4 = [], [], [], []
 
-        return render_template('infrastructure.html', message="Files received successfully!", images=['display/visualize1.png', 'display/visualize2.png', 'display/visualize3.png', 'display/visualize_all.png'])
+    # Load first 30 records and their descriptions
+    def load_data(file_path):
+        df = pd.read_csv(file_path)
+        df_sample = df.head(30)  # First 30 records
+        df_desc = df.describe().to_dict()  # Summary statistics
+        return {"data": df_sample.to_dict(orient="records"), "description": df_desc}
 
-    return render_template('infrastructure.html', message="Please upload your files.")
+    # Load data from CSV files
+    data_list1.append(load_data("../files/building_railway_distances.csv"))
+    data_list2.append(load_data("../files/building_road_distances.csv"))
+    data_list3.append(load_data("../files/cluster_building_density_with_centroids.csv"))
+    data_list4.append(load_data("../files/earthquake_risk_classification.csv"))
+
+    return render_template('infrastructure.html', message="Please upload your files.", data_list1=data_list1, data_list2=data_list2, data_list3=data_list3, data_list4=data_list4)
 
 
 if __name__ == '__main__':

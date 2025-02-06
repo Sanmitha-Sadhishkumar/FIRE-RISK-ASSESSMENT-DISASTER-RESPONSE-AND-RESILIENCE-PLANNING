@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Resource allocation</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0d0d0d, #333);
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0px;
+      background: rgba(20, 20, 20, 0.8);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1200;
+    }
+
+    .navbar .logo {
+      font-size: 24px;
+      font-weight: 600;
+      padding-left: 50px;
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      padding-right: 50px;
+    }
+
+    .navbar ul li a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: 400;
+      transition: color 0.3s ease;
+    }
+
+    .navbar ul li a:hover {
+      color: #00ffcc;
+    }
+
+    .form-section {
+      padding: 120px 50px 50px;
+      background: #222;
+      color: #fff;
+      text-align: center;
+    }
+
+    .form-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+    }
+
+    .form-container {
+      background: #333;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 5px;
+    }
+
+    .form-group input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      background: #444;
+      color: #fff;
+      border: 1px solid #555;
+      border-radius: 5px;
+    }
+
+    .form-group button {
+      padding: 15px 30px;
+      background: #00ffcc;
+      color: #000;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .form-group button:hover {
+      background: #009999;
+    }
+    
+.dataset-container {
+  width: 80%;
+  margin: 40px auto;
+  padding: 20px;
+  background: #222;
+  color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  text-align: left;
+}
+
+.dataset-container h3 {
+  font-size: 1.8rem;
+  color: #00ffcc;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #00ffcc;
+  padding-bottom: 5px;
+}
+
+.dataset-container h4 {
+  font-size: 1.5rem;
+  color: #28a745;
+  margin-top: 15px;
+}
+
+.dataset-container pre {
+  background: #333;
+  padding: 15px;
+  border-radius: 5px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-size: 14px;
+  overflow-x: auto;
+  max-height: 300px;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.dataset-container p {
+  font-size: 1rem;
+  color: #bbb;
+  margin-top: 10px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .dataset-container {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .dataset-container h3 {
+    font-size: 1.5rem;
+  }
+
+  .dataset-container h4 {
+    font-size: 1.3rem;
+  }
+
+  .dataset-container pre {
+    font-size: 12px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">ResQLink</div>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Form Section -->
+  <section class="form-section">
+    <h2>Upload Disaster and Population Data</h2>
+    <div class="form-container">
+      <form action="/upload" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="file1">Upload Boundaries file (XLSX):</label>
+          <input type="file" id="file1" name="file1" accept=".xlsx" required>
+        </div>
+        <div class="form-group">
+          <label for="file2">Upload Occupation File (XLSX):</label>
+          <input type="file" id="file2" name="file2" accept=".xlsx" required>
+        </div>
+        <div class="form-group">
+          <label for="file3">Upload Population Data (CSV):</label>
+          <input type="file" id="file3" name="file3" accept=".csv" required>
+        </div>
+        <div class="form-group">
+          <label for="file4">Upload Fire Locations Data (CSV):</label>
+          <input type="file" id="file4" name="file4" accept=".csv" required>
+        </div>
+        <div class="form-group">
+          <button type="submit">Generate resources count</button>
+        </div>
+      </form>
+    </div>
+  </section>
+  {% for dataset in [data_list1] %}
+    <div class="dataset-container">
+        <h3>Boundaries file (XLSX)</h3>
+        <h4>First 30 Records</h4>
+        <pre>{{ dataset[0].data | tojson(indent=2) }}</pre>
+
+        <h4>Data Description</h4>
+        <pre>{{ dataset[0].description | tojson(indent=2) }}</pre>
+    </div>
+{% endfor %}
+
+{% for dataset in [data_list2] %}
+    <div class="dataset-container">
+        <h3>Occupation File (XLSX)</h3>
+        <h4>First 30 Records</h4>
+        <pre>{{ dataset[0].data | tojson(indent=2) }}</pre>
+
+        <h4>Data Description</h4>
+        <pre>{{ dataset[0].description | tojson(indent=2) }}</pre>
+    </div>
+{% endfor %}
+
+{% for dataset in [data_list3] %}
+    <div class="dataset-container">
+        <h3>Population Data (CSV)</h3>
+        <h4>First 30 Records</h4>
+        <pre>{{ dataset[0].data | tojson(indent=2) }}</pre>
+
+        <h4>Data Description</h4>
+        <pre>{{ dataset[0].description | tojson(indent=2) }}</pre>
+    </div>
+{% endfor %}
+
+{% for dataset in [data_list4] %}
+    <div class="dataset-container">
+        <h3>Fire Locations Data (CSV)</h3>
+        <h4>First 30 Records</h4>
+        <pre>{{ dataset[0].data | tojson(indent=2) }}</pre>
+
+        <h4>Data Description</h4>
+        <pre>{{ dataset[0].description | tojson(indent=2) }}</pre>
+    </div>
+{% endfor %}
+
+{% for dataset in [data_list5] %}
+    <div class="dataset-container">
+        <h3>Intermediate CSV file details</h3>
+        <h4>First 30 Records</h4>
+        <pre>{{ dataset[0].data | tojson(indent=2) }}</pre>
+
+        <h4>Data Description</h4>
+        <pre>{{ dataset[0].description | tojson(indent=2) }}</pre>
+    </div>
+{% endfor %}
+</body>
+</html>
