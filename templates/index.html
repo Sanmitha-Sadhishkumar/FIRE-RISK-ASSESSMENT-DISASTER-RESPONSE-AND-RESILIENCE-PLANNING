@@ -2,243 +2,450 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <title>ResQLink - Real-Time Disaster Alerts</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Innovative Homepage Design</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #0d0d0d, #333);
-      color: #fff;
-      overflow-x: hidden;
+      font-family: 'Roboto', sans-serif;
+      background: url('b87333af-5e5f-4c2c-a9ed-65451eb81136.png') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      background: url("{{ url_for('static', filename='images/bg.png') }}");
+      background-repeat: no-repeat;
+      background-size: cover;
+      transition: all 0.3s ease;
     }
 
-    .navbar {
+    header {
+      background:  rgba(20, 20, 20, 0.9);
+      padding: 20px 50px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 0px;
-      background: rgba(20, 20, 20, 0.8);
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 1200;
+      border-bottom: 3px solid #d32f2f;
     }
 
-    .navbar .logo {
-      font-size: 24px;
-      font-weight: 600;
-      padding-left: 50px;
+    header h1 {
+      font-size: 32px;
+      font-weight: 700;
+      color: #ff5733;
     }
 
-    .navbar ul {
-      list-style: none;
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      padding-right: 50px;
-    }
-
-    .navbar ul li a {
+    nav a {
+      margin-left: 30px;
       text-decoration: none;
-      color: #fff;
-      font-weight: 400;
+      color: #ff5733;
+      font-weight: 500;
+      font-size: 18px;
       transition: color 0.3s ease;
     }
 
-    .navbar ul li a:hover {
-      color: #00ffcc;
+    nav a:hover {
+      color: #f0f0f0;
     }
 
-    .hero-section {
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      background: url('https://via.placeholder.com/1500x800') no-repeat center center/cover;
+    .disaster-alerts {
+      background: rgba(255, 87, 34, 0.9);
+      color: white;
+      overflow: hidden;
+      white-space: nowrap;
       position: relative;
+      padding: 12px 0;
+      font-weight: bold;
+      font-size: 18px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
     }
 
-    .hero-section::before {
-      content: '';
+    .scrolling-text {
+  display: inline-block;
+  white-space: nowrap;
+  animation: scroll-left 20000s linear;
+  padding-left: 100%;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+    .fade-left, .fade-right {
       position: absolute;
       top: 0;
-      left: 0;
-      width: 100%;
+      width: 50px;
       height: 100%;
-      background: rgba(0, 0, 0, 0.6);
-    }
-
-    .hero-content {
       z-index: 1;
+      pointer-events: none;
     }
 
-    .hero-content h1 {
-      font-size: 4rem;
+    .fade-left {
+      left: 0;
+      background: linear-gradient(to right, rgba(255, 87, 34, 0.9), transparent);
+    }
+
+    .fade-right {
+      right: 0;
+      background: linear-gradient(to left, rgba(255, 87, 34, 0.9), transparent);
+    }
+
+    main {
+      padding: 60px 50px;
+      background-color: rgba(0, 0, 0, 0.7);
+      border-radius: 10px;
+      margin-top: 20px;
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.5);
+    }
+
+    h2 {
+      font-size: 36px;
       margin-bottom: 20px;
-      animation: fadeIn 2s ease-in-out;
+      padding-left: 10px;
+      color: #ff5733;
     }
 
-    .hero-content p {
-      font-size: 1.2rem;
-      margin-bottom: 40px;
-      animation: fadeIn 3s ease-in-out;
-    }
-
-    .hero-content .cta-button {
-      padding: 15px 30px;
-      background: #00ffcc;
-      color: #000;
-      border: none;
-      border-radius: 50px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    .hero-content .cta-button:hover {
-      background: #009999;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
+    p {
+      font-size: 18px;
+      line-height: 1.6;
     }
 
     .features-section {
-      padding: 100px 50px;
-      background: #222;
-      color: #fff;
-      text-align: center;
+      background:  url("https://media.tenor.com/Y24PFIZnVOEAAAAM/sky-orange.gif");
+      background-repeat: no-repeat;
+      background-size: cover;
+  padding: 20px 10px;
+  margin-top: 30px;
+  border-radius: 10px;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 0 10px;
+}
+
+.feature-card {
+  background: linear-gradient(145deg, #ff5e3a, #ff3d2e);
+  color: #fff;
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 14px rgba(255, 87, 51, 0.5);
+}
+
+.feature-card i {
+  font-size: 24px;
+  margin-bottom: 10px;
+  display: block;
+  color: #fff;
+}
+
+.feature-card h3 {
+  font-size: 17px;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.feature-card a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.feature-card a:hover {
+  color: #f0f0f0;
+}
+
+
+    /* Loading Spinner */
+    .spinner {
+      margin: 0 auto;
+      width: 40px;
+      height: 40px;
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      border-top: 4px solid #ff5733;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
     }
 
-    .features-section h2 {
-      font-size: 2.5rem;
-      margin-bottom: 50px;
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
+    
+    /* Hide spinner when disaster feed is loaded */
+    #loading-spinner {
+      display: none;
     }
+    /* Two Column Layout */
+#left-container {
+  display: inline-block;
+  float: left;
+  width: 70%;
+  margin-left: 10px;
+  padding-left: 10px;
+}
 
-    .feature-card {
-      background: #333;
+#panel {
+  display: inline-block;
+  float: right;
+  width: 25%;
+  text-align: center;
+}
+
+/* Container for the image grid */
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns of equal width */
+    gap: 10px; /* Space between the images */
+    max-width: 600px;
+    margin: auto;
+    margin-right:30px;
+    margin-top: 30px;
+}
+
+/* Styling the images to make them the same size */
+.image-grid img {
+    width: 100%; /* Ensures images fill the grid cell */
+    height: 200px; /* Fixed height */
+    object-fit: cover; /* Ensures images cover the space without distorting */
+    border-radius: 8px; /* Optional: Add rounded corners to images */
+}
+
+.feed-container {
+      background:  url("https://media.tenor.com/Y24PFIZnVOEAAAAM/sky-orange.gif");
+      background-repeat: no-repeat;
+      background-size: cover;
       padding: 20px;
       border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-      transition: transform 0.3s ease;
+      box-shadow: 0px 0px 10px #ccc;
+      max-width: 1000px;
+      margin: auto;
+      margin-top: 30px;
     }
-
-    .feature-card:hover {
-      transform: translateY(-10px);
-    }
-
-    .feature-card h3 {
-      font-size: 1.5rem;
-      margin-bottom: 15px;
-    }
-
-    .feature-card p {
-      font-size: 1rem;
-      color: #bbb;
-    }
-
-    .footer {
-      background: #111;
-      color: #fff;
+    h1 {
       text-align: center;
-      padding: 20px;
     }
-
-    .footer a {
-      color: #00ffcc;
+    .feed-item {
+      border-bottom: 1px solid #ddd;
+      padding: 10px 0;
+    }
+    .feed-item:last-child {
+      border-bottom: none;
+    }
+    .feed-item a {
+      font-weight: bold;
+      color: #007BFF;
       text-decoration: none;
     }
 
-    .footer a:hover {
-      text-decoration: underline;
+    .feature-card img{
+      width: 80%;
+      height: 200px;
     }
-a {
-  color: white;
-}
 
-a:hover {
-  color: red;
-}
+    #panel img {
+      margin-top: 40px;
+      margin-right: 20px;
+      width: 100%;
+    }
   </style>
 </head>
 <body>
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="logo">ResQLink</div>
-    <ul>
-      <li><a href="#home">Home</a></li>
-      <li><a href="#features">Modules</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
 
-  <!-- Hero Section -->
-  <section class="hero-section" id="home">
-    <div class="hero-content">
-        <h1>Welcome to the Future of Disaster Response</h1>
-        <p>Experience the next generation of disaster rescue and resilience planning, powered by satellite imagery and LiDAR technology for smarter, faster, and safer emergency response.</p>
-        <button class="cta-button">Get Started</button>
+  <header>
+    <h1>ResQLink</h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#features">Modules</a>
+      <a href="#">About</a>
+      <a href="#">Team</a>
+    </nav>
+  </header>
+
+  <div class="disaster-alerts">
+    <div class="fade-left"></div>
+    <div class="fade-right"></div>
+    <div id="disaster-feed" class="scrolling-text">
+      <!--
+      <p id="feed-para">
+      🔥 Wildfire in Russian Federation 1023671 | 🔥 Wildfire in Russian Federation 1023673 | 🔥 RX HWY 27 Divide & Little Fir Wildfire, Montgomery, Arkansas | 🔥 Bienville CPT 19 21 RX Wildfire, Scott, Mississippi | 🔥 RX Ross Creek West Wildfire, Scott, Arkansas | 🔥 RX Highway 298 RX Wildfire, Montgomery, Arkansas | 🔥 RX Ross Creek West Wildfire, Scott, Arkansas | 🔥 RX Little Fir West & North Wildfire, Montgomery, Arkansas | 🔥 RX Yell County East Wildfire, Yell, Arkansas | 🔥 RX HWY 27 Divide & Little Fir Wildfire, Montgomery, Arkansas | 🔥 RX Beech Creek C2 C3 C4 Wildfire, Montgomery, Arkansas | 🔥 RX Pilot Knob Wildfire, Scott, Arkansas | 🔥 RX Spring Lake Wildfire, Yell, Arkansas | 🔥 RX Buffalo North Wildfire, Scott, Arkansas | 🔥 RX Big Hill Wildfire, Garland, Arkansas | 🔥 RX Yell County Central Wildfire, Yell, Arkansas | 🔥 RX Bear Hollow Wildfire, Scott, Arkansas | 🔥 RX Cherry Hill Wildfire, Polk, Arkansas | 🔥 RX Johnson County North Wildfire, Johnson, Arkansas | 🔥 RX Blue Mountain South Wildfire, Logan, Arkansas | 🔥 RX Sugarloaf Wildfire, Logan, Arkansas | 🔥 RX Salt Fork Wildfire, Logan, Arkansas | 🔥 RX Lake Sylvia Wildfire, Perry, Arkansas | 🔥 RX Ouachita Mountains North Wildfire, Perry, Arkansas | 🔥 RX Hickory Nut North Wildfire, Garland, Arkansas | 🔥 RX Forked Mountain Wildfire, Perry, Arkansas | 🔥 RX Yell County West Wildfire, Yell, Arkansas | 🔥 RX South Fourche Wildfire, Perry, Arkansas | 🔥 RX Maumelle Wildfire, Pulaski, Arkansas | 🔥 RX Conway County South Wildfire, Conway, Arkansas | 🔥 RX Big Fir North Wildfire, Montgomery, Arkansas | 🔥 RX Dry Fork Wildfire, Montgomery, Arkansas | 🔥 RX Brushy Creek Wildfire, Polk, Arkansas | 🔥 RX Mill Creek Wildfire, Scott, Arkansas | 🔥 RX Crystal Springs Wildfire, Garland, Arkansas | 🔥 RX Ross Creek Central Wildfire, Scott, Arkansas | 🔥 RX Buck Knob Wildfire, Yell, Arkansas | 🔥 RX Carter Creek Wildfire, Montgomery, Arkansas | 🔥 RX Hickory Nut South Wildfire, Garland, Arkansas | 🔥 RX Washita Creek Wildfire, Yell, Arkansas | 🔥 RX Winding Stair Wildfire, Polk, Arkansas | 🔥 RX Dry Mountain Wildfire, Polk, Arkansas | 🔥 RX South Fork Wildfire, Montgomery, Arkansas | 🔥 RX Crystal Peninsula Wildfire, Garland, Arkansas
+      </p>-->
+      <p id="feed-para"></p>
+      </div>
+  </div>
+
+  <script>
+let userInteracted = false;
+
+// Listen for user interaction (click, touch, or keypress)
+document.addEventListener('click', () => {
+  userInteracted = true;
+});
+document.addEventListener('touchstart', () => {
+  userInteracted = true;
+});
+document.addEventListener('keydown', () => {
+  userInteracted = true;
+});
+
+function getUserLocation() {
+  return new Promise((resolve, reject) => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const coords = {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          };
+          resolve(coords);
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    } else {
+      reject(new Error("Geolocation is not supported by this browser."));
+    }
+  });
+}
+
+async function loadDisasterAlerts() {
+  const feed = document.getElementById("feed-para");
+  let alerts = [];
+  try {
+    const res = await fetch('https://eonet.gsfc.nasa.gov/api/v3/events?status=open');
+
+    if (!res.ok) {
+      console.error("Failed to fetch disaster data.");
+      return;
+    }
+
+    const data = await res.json();
+    console.log("Fetched data:", data);  // Debugging the data fetched
+
+    const sortedEvents = data.events.sort((a, b) => {
+      const dateA = a.geometry && a.geometry[0].date ? new Date(a.geometry[0].date) : new Date(0);
+      const dateB = b.geometry && b.geometry[0].date ? new Date(b.geometry[0].date) : new Date(0);
+      return dateB - dateA;
+    });
+
+    sortedEvents.forEach(event => {
+      const category = event.categories[0].title;
+      const title = event.title;
+      const geometry = event.geometry[0];
+      const date = geometry && geometry.date ? new Date(geometry.date) : null;
+
+      const severityEmoji = {
+        'Volcanoes': '🌋',
+        'Wildfires': '🔥',
+        'Severe Storms': '🌩️',
+        'Floods': '🌊',
+        'Earthquakes': '💥'
+      };
+
+      // Format date as "DD MMM YYYY, HH:mm"
+      const formattedDate = date
+        ? `${date.getDate().toString().padStart(2, '0')} ${date.toLocaleString('default', { month: 'short' })} ${date.getFullYear()}, ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`
+        : 'Date unknown';
+
+      alerts.push(`${severityEmoji[category] || '⚠️'} ${title} (${formattedDate})`);
+    });
+  } catch (error) {
+    console.error("Error loading disaster alerts:", error);
+  } finally {
+    feed.innerText = alerts.join(" | ");
+    console.log("Alerts:", alerts);
+  }
+}
+
+// Load disaster alerts when the page is loaded
+loadDisasterAlerts();
+
+  </script>
+<div id="left-container">
+<section class="features-section" id="features">
+  <h2>Services</h2>
+  <div class="features-grid">
+    <div class="feature-card">
+      <h3><i class="fas fa-fire"></i><a href="/fire_risk">Rescue Route for Wildfire</a></h3>
+      <img src="{{ url_for('static', filename='images/3.png') }}" alt="Image 3">
     </div>
-  </section>
+    <div class="feature-card">
+      <h3><i class="fas fa-truck-loading"></i><a href="/resource">Allocate Dynamic Resource</a></h3>
+      <img src="{{ url_for('static', filename='images/4.png') }}" alt="Image 4">
+    </div>
+    <div class="feature-card">
+      <h3><i class="fas fa-city"></i><a href="/infrastructure">Assess Infrastructure</a></h3>
+      <img src="{{ url_for('static', filename='images/2.png') }}" alt="Image 2">
+    </div>
+    <div class="feature-card">
+      <h3><i class="fas fa-hospital-alt"></i><a href="/shelter_asses">Find Pre-Disaster Emergency Shelters</a></h3>
+      <img src="{{ url_for('static', filename='images/7.png') }}" alt="Image 2">
+    </div>
+    <div class="feature-card">
+      <h3><i class="fas fa-map-marker-alt"></i><a href="/safe_zone">Find Emergency Safe Zones during disaster</a></h3>
+      <img src="{{ url_for('static', filename='images/6.png') }}" alt="Image 4">
+    </div>
+    <div class="feature-card">
+      <h3><i class="fas fa-coins"></i><a href="/building_collapse">Calculate Recovery Cost</a></h3>
+      <img src="{{ url_for('static', filename='images/1.png') }}" alt="Image 1">
+    </div>
+  </div>
+</section>
+<div class="feed-container">
+  <h1>Latest Disaster News</h1>
+  <div id="feed"></div>
+</div>
 
-  <!-- Features Section -->
-  <section class="features-section" id="features">
-    <h2>Modules</h2>
-    <div class="features-grid">
-        <div class="feature-card">
-            <h3><a href="/architecture">Architecture</a></h3>
-            <p>We design a robust system architecture leveraging satellite imagery and LiDAR data, ensuring seamless integration for real-time disaster response and resilience planning.</p>
-          </div>
-          <div class="feature-card">
-            <h3><a href="/literature_survey">Literature Survey</a></h3>
-            <p>A comprehensive review of existing research and technologies related to disaster response, satellite imagery, and LiDAR applications to guide our project’s development and innovation.</p>
-          </div>          
-        <div class="feature-card">
-            <h3><a href="/fire_risk">Fire Risk Assessment and Rescue Route Planning</a></h3>
-            <p>Utilizing satellite imagery and LiDAR, we assess fire risks and plan optimal rescue routes to ensure quick and safe evacuation during emergencies.</p>
-          </div>
-          <div class="feature-card">
-            <h3><a href="/resource">Dynamic Resource Distribution</a></h3>
-            <p>Real-time resource allocation and distribution, ensuring that emergency teams are equipped and ready to respond promptly to disaster zones.</p>
-          </div>
-          <div class="feature-card">
-            <h3><a href="/infrastructure">Infrastructure in Disaster-Prone Areas</a></h3>
-            <p>Assessing and planning infrastructure placement in high-risk areas to ensure resilience and safety during natural disasters.</p>
-          </div>
-          <div class="feature-card">
-            <h3>Building Collapse Prediction</h3>
-            <p>Leveraging data to predict building collapses in disaster-prone areas, enabling timely evacuations and mitigation strategies.</p>
-          </div>
-          <div class="feature-card">
-            <h3>Post-Disaster Damage Assessment and Recovery Planning</h3>
-            <p>Assessing damage after a disaster and planning recovery efforts using satellite and LiDAR data to prioritize critical areas for rebuilding.</p>
-          </div>
-          <div class="feature-card">
-            <h3>Emergency Safe Zones and Shelter Planning</h3>
-            <p>Identifying and planning safe zones and shelters to accommodate disaster-affected populations and ensure their safety during emergencies.</p>
-          </div>
-          </div>          
-  </section>
+<script>
+  const feedUrls = [
+    'https://api.rss2json.com/v1/api.json?rss_url=https://reliefweb.int/headlines/rss.xml',
+    'https://api.rss2json.com/v1/api.json?rss_url=https://www.gdacs.org/rss.aspx'
+  ];
 
-  <!-- Footer -->
-  <footer class="footer">
-    <p></p>
-  </footer>
+  const feedContainer = document.getElementById('feed');
+
+  async function loadFeeds() {
+    for (const url of feedUrls) {
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        if (data.items) {
+          data.items.slice(0, 5).forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'feed-item';
+            div.innerHTML = `<a href="${item.link}" target="_blank">${item.title}</a><p>${item.pubDate}</p>`;
+            feedContainer.appendChild(div);
+          });
+        }
+      } catch (error) {
+        console.error('Error loading feed:', error);
+      }
+    }
+  }
+
+  loadFeeds();
+</script>
+</div>
+<div id="panel">
+<img src="{{ url_for('static', filename='images/5.jpg') }}" alt="Image 1">
+<img src="https://th.bing.com/th/id/OIP.VVQVSxozBcZZonZX22zwxAHaHa?w=250&h=250&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=3.1&rm=2" alt="Image 1">
+<img src="https://cdn.statcdn.com/Infographic/images/normal/25378.jpeg" alt="Image 1">
+
+</div>
 </body>
 </html>
